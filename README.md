@@ -1,6 +1,6 @@
 # Todo-app
 
-This projects contains a simple TODO application created using MERN and it has the following features-
+This projects contains a simple TODO application created using the MERN and it has the following features-
 
 -A user can Sign up
 -A user can sign in
