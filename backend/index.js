@@ -1,12 +1,13 @@
 const express=require('express');
 const { createTodo, updateTodo } = require('./type');
+const { todo } = require('./db');
 
 const app=express();
 const PORT=3000;
 
 app.use(express.json());
 
-app.post("/todos",(req,res)=>{
+app.post("/todos",async (req,res)=>{
     const createPayload =req.body;
     const parsedPayload =createTodo.safeParse(createPayload);
 
@@ -18,9 +19,22 @@ app.post("/todos",(req,res)=>{
     }
 
     //Put it in mongodb
+    await todo.create({
+        title: createPayload.title,
+        decription: createPayload.description,
+        completed: false
+    })
+    res.json({
+        msg: "Todo created"
+    })
 })
 
 app.get('/todos',(req,res)=>{
+    const todos=todo.find({});
+
+    res.json({
+        todos
+    })
     
 })
 
